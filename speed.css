@@ -6,7 +6,7 @@
 }
 
 html {
-    font-family: Fira Mono, 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Fira Mono', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     --main-color: #fa003e6b;
     scrollbar-color: var(--main-color) #5001158c;
     scrollbar-width: thin;
@@ -45,16 +45,18 @@ body {
 
 header {
     background-color: #ff00627c;
+    box-shadow: 0px .5px 8px 1px #013350;
 }
 
 header h1 {
     text-align: center;
-    padding: 1em 0em;
+    padding: 0.5em 0em;
     color: #ffff;
 }
 
 main {
     min-height: 100vh;
+    padding-bottom: 2em;
 }
 
 main #word,
