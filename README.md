@@ -1,2 +1,2 @@
 # speed-typing-game
-[Link](https://muirurii.github.io/speep-typing/ "here")
+[Link](https://muirurii.github.io/speed-typing/ "here")
