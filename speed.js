@@ -50,7 +50,7 @@ function countDown(word) {
     const interval = setInterval(() => {
         time--;
         if (time < 0) {
-            clearInterval(interval)
+            clearInterval(interval);
             checkResult(word);
             return;
         }
@@ -76,7 +76,7 @@ function checkResult(word) {
         if (isHighScore) notificationElement.innerHTML += ' <br><span class="animate-high">New high score &star;</span>';
         score = 0;
         setTimeout(() => wordElement.innerHTML = '', 1000);
-        startButton.textContent = 'New Game'
+        startButton.textContent = 'New Game';
     }
     inputElement.value = '';
 }
