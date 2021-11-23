@@ -1,0 +1,196 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap");
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Fira Mono, 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    --main-color: #fa003e6b;
+    scrollbar-color: var(--main-color) #5001158c;
+    scrollbar-width: thin;
+}
+
+html::-webkit-scrollbar {
+    width: 1vh;
+}
+
+html::-webkit-scrollbar-thumb {
+    background-color: #5001158c;
+    border-radius: 20px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background-color: #500115;
+}
+
+html::-webkit-scrollbar-track {
+    background-color: #fa003e6b;
+}
+
+body {
+    position: relative;
+}
+
+.bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('5fe072ac824c2d168c4a9c72a83c6a27.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    z-index: -1;
+}
+
+header {
+    background-color: #ff00627c;
+}
+
+header h1 {
+    text-align: center;
+    padding: 1em 0em;
+    color: #ffff;
+}
+
+main {
+    min-height: 100vh;
+}
+
+main #word,
+main #notification {
+    text-align: center;
+    padding: 0.4em 0em;
+    min-height: 2em;
+}
+
+main #notification {
+    animation: notification 1s;
+}
+
+main #notification,
+.correct {
+    color: green;
+}
+
+.incorrect {
+    color: red;
+    font-size: 0.9em;
+    text-decoration: underline;
+}
+
+.animate-high {
+    animation: high 200ms 400ms ease-in forwards;
+    transform: scaleY(0);
+    transform-origin: top;
+    display: inline-block;
+}
+
+@keyframes high {
+    to {
+        transform: scaleY(1);
+    }
+}
+
+main #word {
+    font-size: 1.5em;
+    color: #013350;
+}
+
+main form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+main button {
+    cursor: pointer;
+    margin-top: 1em;
+    padding: 0.5em 4em;
+    background-color: #013350;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+main button:hover {
+    background-color: #013350d5;
+    ;
+}
+
+main button:disabled {
+    opacity: 0;
+}
+
+main input {
+    margin-top: 0.15em;
+    height: 25px;
+    width: 250px;
+    padding-left: 0.5em;
+    border: 1px solid #000;
+    border-radius: 5px;
+    outline: none;
+}
+
+main input:focus {
+    box-shadow: 0.5px 0.5px 3px 0.2px #000000;
+}
+
+main .container {
+    margin: 0.5em 10% 0em 10%;
+    padding-bottom: 2em;
+    background-color: var(--main-color);
+    width: 80vw;
+    backdrop-filter: blur(20px);
+    border-radius: 10px;
+}
+
+#game-board {
+    padding: 2em 25%;
+}
+
+#game-board label {
+    display: inline-block;
+    margin: 0.5em 0em;
+    font-weight: bold;
+    color: #013350;
+}
+
+#game-board span {
+    color: #ccc;
+}
+
+#game-board select {
+    cursor: pointer;
+    outline: none;
+    height: 30px;
+    width: 100px;
+    color: #013350;
+    background: transparent;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    text-align: center;
+}
+
+#instructions {
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    font-family: cursive, sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#instructions h3 {
+    color: #013350;
+    padding: 0.5em;
+    font-family: fira Mono, 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#instructions p {
+    padding: 0.8em;
+    color: #fff;
+    border-radius: 3px;
+}
