@@ -27,6 +27,7 @@ function generateWord() {
 
     fetchData()
         .then(word => {
+            notificationElement.textContent = '';
             wordElement.innerHTML = '';
             word.split('').forEach(word => wordElement.innerHTML += `<span>${word}</span>`);
             countDown(word);
@@ -38,6 +39,7 @@ function generateWord() {
 }
 
 async function fetchData() {
+    notificationElement.textContent = 'getting word...';
     const response = await fetch('https://random-words-api.vercel.app/word');
     const wordObj = await response.json();
     return wordObj[0].word;
