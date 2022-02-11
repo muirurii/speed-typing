@@ -14,7 +14,7 @@ startButton.addEventListener('click', startGame);
 inputElement.addEventListener('keyup', markCorrect);
 levelElement.addEventListener('change', () => timeElement.textContent = levelElement.value);
 
-function startGame(e) {
+const startGame = (e)=> {
     e.preventDefault();
     inputElement.focus();
     scoreElement.textContent = 0;
@@ -23,29 +23,27 @@ function startGame(e) {
     startButton.disabled = 'true';
 }
 
-function generateWord() {
-
-    fetchData()
-        .then(word => {
-            notificationElement.textContent = '';
-            wordElement.innerHTML = '';
-            word.split('').forEach(word => wordElement.innerHTML += `<span>${word}</span>`);
-            countDown(word);
-        })
-        .catch(err => {
-            notificationElement.textContent = 'Please connect to the internet !';
-        });
-
+const generateWord = async () =>{
+   const word = await fetchData();
+   if(!word){
+     return notificationElement.textContent = 'Please connect to the internet !';
+   }else{
+   notificationElement.textContent = '';
+   wordElement.innerHTML = '';
+   word.split('').forEach(word => wordElement.innerHTML += `<span>${word}</span>`);
+   countDown(word);
+   }
 }
 
-async function fetchData() {
+const fetchData = async () => {
     notificationElement.textContent = 'getting word...';
     const response = await fetch('https://random-words-api.vercel.app/word');
+    if(!response.ok) return false;
     const wordObj = await response.json();
     return wordObj[0].word;
 }
 
-function countDown(word) {
+const countDown = word => {
     time = levelElement.value;
     levelElement.disabled = 'true';
     timeElement.textContent = time;
@@ -60,7 +58,7 @@ function countDown(word) {
     }, 1000);
 }
 
-function checkResult(word) {
+const checkResult = word => {
     if (inputElement.value.toLowerCase() === word.toLowerCase()) {
         notificationElement.innerHTML = 'Correct &check;';
         setTimeout(() => { notificationElement.innerHTML = ''; }, 1500);
@@ -83,7 +81,7 @@ function checkResult(word) {
     inputElement.value = '';
 }
 
-function markCorrect() {
+const markCorrect = ()=> {
     let finalArray = wordElement.querySelectorAll('span');
     let typedArray = inputElement.value.split('');
     let isCorrect = true;
@@ -100,7 +98,7 @@ function markCorrect() {
     if (typedArray[finalArray.length - 1] && isCorrect) time = 0;
 }
 
-function updateHighScore() {
+const updateHighScore = ()=> {
     let highScore = localStorage.getItem('highScore');
     if (!highScore && score > 0) {
         localStorage.setItem('highScore', score);
