@@ -9,41 +9,32 @@ let time = 0;
 const levelElement = document.getElementById('level');
 const wordElement = document.getElementById('word');
 
-
-startButton.addEventListener('click', startGame);
-inputElement.addEventListener('keyup', markCorrect);
-levelElement.addEventListener('change', () => timeElement.textContent = levelElement.value);
-
-function startGame(e) {
+const startGame = (e) => {
     e.preventDefault();
     inputElement.focus();
     scoreElement.textContent = 0;
     notificationElement.innerHTML = '';
-    generateWord();
+    fetchData();
     startButton.disabled = 'true';
 }
 
-function generateWord() {
 
-    fetchData()
-        .then(word => {
-            wordElement.innerHTML = '';
-            word.split('').forEach(word => wordElement.innerHTML += `<span>${word}</span>`);
-            countDown(word);
-        })
-        .catch(err => {
-            notificationElement.textContent = 'Please connect to the internet !';
-        });
-
+const fetchData = async() => {
+    notificationElement.textContent = 'getting word...';
+    try {
+        const response = await fetch('https://random-words-api.vercel.app/word');
+        const wordObj = await response.json();
+        const word = wordObj[0].word;
+        notificationElement.textContent = '';
+        wordElement.innerHTML = '';
+        word.split('').forEach(word => wordElement.innerHTML += `<span>${word}</span>`);
+        countDown(word);
+    } catch (err) {
+        return notificationElement.textContent = 'Please connect to the internet !';
+    }
 }
 
-async function fetchData() {
-    const response = await fetch('https://random-words-api.vercel.app/word');
-    const wordObj = await response.json();
-    return wordObj[0].word;
-}
-
-function countDown(word) {
+const countDown = word => {
     time = levelElement.value;
     levelElement.disabled = 'true';
     timeElement.textContent = time;
@@ -58,13 +49,13 @@ function countDown(word) {
     }, 1000);
 }
 
-function checkResult(word) {
+const checkResult = word => {
     if (inputElement.value.toLowerCase() === word.toLowerCase()) {
         notificationElement.innerHTML = 'Correct &check;';
         setTimeout(() => { notificationElement.innerHTML = ''; }, 1500);
         score++;
         scoreElement.textContent = score;
-        setTimeout(generateWord, 500);
+        setTimeout(fetchData, 500);
     } else {
         let isHighScore = updateHighScore();
         startButton.disabled = '';
@@ -81,7 +72,7 @@ function checkResult(word) {
     inputElement.value = '';
 }
 
-function markCorrect() {
+const markCorrect = () => {
     let finalArray = wordElement.querySelectorAll('span');
     let typedArray = inputElement.value.split('');
     let isCorrect = true;
@@ -98,7 +89,7 @@ function markCorrect() {
     if (typedArray[finalArray.length - 1] && isCorrect) time = 0;
 }
 
-function updateHighScore() {
+const updateHighScore = () => {
     let highScore = localStorage.getItem('highScore');
     if (!highScore && score > 0) {
         localStorage.setItem('highScore', score);
@@ -113,3 +104,8 @@ function updateHighScore() {
     }
 }
 if (localStorage.getItem('highScore')) highScoreElement.textContent = localStorage.getItem('highScore');
+
+
+startButton.addEventListener('click', startGame);
+inputElement.addEventListener('keyup', markCorrect);
+levelElement.addEventListener('change', () => timeElement.textContent = levelElement.value);

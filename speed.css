@@ -46,12 +46,17 @@ body {
 header {
     background-color: #ff00627c;
     box-shadow: 0px .5px 8px 1px #0133505e;
+    height: 150px;
+    margin-bottom: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 header h1 {
     text-align: center;
     padding: 0.5em 0em;
-    color: #ffff;
+    color: #013350;
 }
 
 main {
@@ -96,7 +101,7 @@ main #notification,
 
 main #word {
     font-size: 1.5em;
-    color: #ffffff;
+    color: #fff;
 }
 
 main form {
